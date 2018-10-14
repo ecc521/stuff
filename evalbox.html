@@ -9,7 +9,8 @@
        var result = '';
        try {
          result = eval(e.data);
-       } catch (e) {
+       } 
+       catch (e) {
          result = 'eval() threw an exception.';
        }
        mainWindow.postMessage(result, e.origin);

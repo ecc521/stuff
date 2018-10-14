@@ -12,17 +12,21 @@
   </head>
   <body>
     <h1>Image Tools</h1>
-    <iframe sandbox='allow-scripts' id='evalbox' src='frame.html'></iframe>
+    <iframe onload="evalboxready()" sandbox='allow-scripts' id='evalbox' src='frame.html'></iframe>
 
     <script>
       function GetId(n){return document.getElementById(n)}
+      
       function evaluate(code) {
         var sandboxedframe = GetId("evalbox")
         sandboxedframe.contentWindow.postMessage(code, '*');
       }
 
       var code = "console.log('hello')"
-      setTimeout(function(){evaluate(code)},1000)
+      
+      function evalboxready() {
+      evaluate(code)
+      }
 
       window.addEventListener('message', function (e) {
         if ((e.origin === "null" && e.source === sandboxedFrame.contentWindow)) {

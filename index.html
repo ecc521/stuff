@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Evalbox</title>
+    <title>Image Tools</title>
     <style>
       body {
         width: 500px;
@@ -43,13 +43,10 @@
     the field below; clicking one of the two buttons will run the code through
     <code>eval()</code> in an <code>iframe</code>. The difference between the
     sandboxed and unsandboxed versions should quickly become apparent:</p>
-    <textarea id='code'>window.localStorage['sekrit']</textarea>
+    <textarea id='code'></textarea>
 
-    <button id='unsafe'>eval() in an unsandboxed frame.</button>
     <button id='safe'>eval() in a sandboxed frame.</button>
 
-    <iframe id='unsandboxed'
-            src='frame.html'></iframe>
     <iframe sandbox='allow-scripts'
             id='sandboxed'
             src='frame.html'></iframe>
@@ -57,7 +54,6 @@
     <script>
       window.localStorage['sekrit'] = '[insert sensitive information here]';
       var sandboxedFrame = document.getElementById('sandboxed');
-      var unsandboxedFrame = document.getElementById('unsandboxed');
 
       function evaluate(frame) {
         var code = document.getElementById('code').value;
@@ -68,9 +64,6 @@
         frame.contentWindow.postMessage(code, '*');
       }
 
-      document.getElementById('unsafe').addEventListener('click', function () {
-        evaluate(unsandboxedFrame);
-      });
       document.getElementById('safe').addEventListener('click', function () {
         evaluate(sandboxedFrame);
       });
@@ -84,9 +77,7 @@
         // header have "null" rather than a valid origin. This means you still
         // have to be careful about accepting data via the messaging API you
         // create. Check that source, and validate those inputs!
-        if ((e.origin === "null" && e.source === sandboxedFrame.contentWindow)
-            || (e.origin === (window.location.protocol + "//" + window.location.host)
-                && e.source === unsandboxedFrame.contentWindow)) {
+        if ((e.origin === "null" && e.source === sandboxedFrame.contentWindow)) {
           alert('Result: ' + e.data);
         }
       });

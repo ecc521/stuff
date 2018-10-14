@@ -4,7 +4,7 @@
     <title>Evalbox's Frame</title>
     <script>
       window.addEventListener('message', function (e) {
-        if (e.origin !== (window.location.protocol + "//" + window.location.host)) {
+        if (e.origin !== "https://ecc521.github.io") {
           return "Your origin is not permitted to use this evalbox";
         }
 
@@ -15,7 +15,7 @@
         try {
           result = eval(e.data);
         } catch (e) {
-          result = e;
+          result = String(e);
         }
         mainWindow.postMessage(result, e.origin);
       });

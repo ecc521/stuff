@@ -39,10 +39,6 @@
   </head>
   <body>
     <h1>Evalbox</h1>
-    <p class='lead'>A toy demonstration of sandboxing. Type some JavaScript into
-    the field below; clicking one of the two buttons will run the code through
-    <code>eval()</code> in an <code>iframe</code>. The difference between the
-    sandboxed and unsandboxed versions should quickly become apparent:</p>
     <textarea id='code'></textarea>
 
     <button id='safe'>eval() in a sandboxed frame.</button>
@@ -52,7 +48,6 @@
             src='frame.html'></iframe>
 
     <script>
-      window.localStorage['sekrit'] = '[insert sensitive information here]';
       var sandboxedFrame = document.getElementById('sandboxed');
 
       function evaluate(frame) {

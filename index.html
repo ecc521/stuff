@@ -20,16 +20,16 @@
       //Note: Only one call to this should be going on at once
       async function evaluate(code) {
         GetId("evalbox").contentWindow.postMessage(code, '*');
-        
+                
+        return new Promise(function(resolve,reject) {
+          
         function checkresp(e){
           if ((e.origin === "null" && e.source === GetId("evalbox").contentWindow)) {
             window.removeEventListener("message", checkresp)
             resolve(e.data);
           }
-        }
-        
-        return new Promise(function(resolve,reject) {
-          window.addEventListener("message", checkresp)
+        } 
+        window.addEventListener("message", checkresp)
         })
       }
       

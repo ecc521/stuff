@@ -5,16 +5,16 @@
     <script>
       window.addEventListener('message', function (e) {
         if (e.origin !== "https://ecc521.github.io") {
+          console.log(e.origin)
           return "Your origin is not permitted to use this evalbox";
         }
-
-        console.log(e.origin)
         
         var mainWindow = e.source;
         var result = '';
         try {
           result = eval(e.data);
-        } catch (e) {
+        } 
+        catch (e) {
           result = String(e);
         }
         mainWindow.postMessage(result, e.origin);

@@ -18,6 +18,9 @@ async function genimg() {
     var img = await createImageBitmap(images[i])
     
     var canvas = document.getElementById("canvas");
+        
+    canvas.hidden = ""
+        
     canvas.height = img.height
     canvas.width = img.width
     
@@ -46,7 +49,7 @@ async function genimg() {
     
     var content = await folder.generateAsync({type:"blob"})
     
-    
+    canvas.hidden = "hidden"
     
     var link = document.createElement("a");
     document.body.appendChild(link);
@@ -56,5 +59,6 @@ async function genimg() {
     link.click();
     
     document.body.removeChild(link);
+    
     
 }

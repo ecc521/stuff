@@ -1,4 +1,4 @@
-<script src="http://127.0.0.1:8887/localtesting.com/JSZip.js"></script>
+<script src="https://ecc521.github.io/stuff/JSZip.js"></script>
 
 <p>Pick your images below. This program will flip your images horizontally and download them for you.<br>
 This can be used to allow printing images onto wood.</p>
@@ -22,7 +22,6 @@ canvas {
 
 <script>
 function GetId(n){return document.getElementById(n)}
-var wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 
 async function genimg() {
     var elem = GetId("input")

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Evalbox's Frame</title>
+    <script src="https://ecc521.github.io/stuff/imageflipper/JSZip.js"></script>
+    <script>
+      window.addEventListener('message', function (e) {
+        if (e.origin !== "https://ecc521.github.io") {
+          console.log(e.origin + " is not permitted to use this evalbox")
+          return "Your origin is not permitted to use this evalbox";
+        }
+        var mainWindow = e.source;
+        var result = '';
+        try {
+          result = eval(e.data);
+        } 
+        catch (e) {
+          result = String(e);
+        }
+        mainWindow.postMessage(result, e.origin);
+      });
+    </script>
+  </head>
+</html>

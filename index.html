@@ -18,8 +18,7 @@
       function GetId(n){return document.getElementById(n)}
       
       function evaluate(code) {
-        var sandboxedframe = GetId("evalbox")
-        sandboxedframe.contentWindow.postMessage(code, '*');
+        GetId("evalbox").contentWindow.postMessage(code, '*');
       }
 
       var code = "console.log('hello')"
@@ -29,10 +28,11 @@
       }
 
       window.addEventListener('message', function (e) {
-        if ((e.origin === "null" && e.source === sandboxedFrame.contentWindow)) {
+        if ((e.origin === "null" && e.source === GetId("evalbox").contentWindow)) {
           console.log(e.data);
         }
       });
+      
     </script>
   </body>
 </html>

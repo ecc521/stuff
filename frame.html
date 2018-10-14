@@ -9,7 +9,7 @@
           console.log(e.origin + " is not permitted to use this evalbox")
           return "Your origin is not permitted to use this evalbox";
         }
-        
+        console.log(e.data)
         var mainWindow = e.source;
         var result = '';
         try {

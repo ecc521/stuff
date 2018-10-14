@@ -6,7 +6,7 @@
     <script>
       window.addEventListener('message', function (e) {
         if (e.origin !== "https://ecc521.github.io") {
-          console.log(e.origin)
+          console.log(e.origin + " is not permitted to use this evalbox")
           return "Your origin is not permitted to use this evalbox";
         }
         

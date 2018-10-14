@@ -12,30 +12,20 @@
   </head>
   <body>
     <h1>Image Tools</h1>
-    
-    <textarea id='code'></textarea>
-
-    <button id='safe'>eval() in a sandboxed frame.</button>
-
-    <iframe sandbox='allow-scripts'
-            id='sandboxed'
-            src='frame.html'></iframe>
+    <iframe sandbox='allow-scripts' id='evalbox' src='frame.html'></iframe>
 
     <script>
-      var sandboxedFrame = document.getElementById('sandboxed');
-
-      function evaluate(frame) {
-        var code = document.getElementById('code').value;
-        frame.contentWindow.postMessage(code, '*');
+      function evaluate(code) {
+        var sandboxedframe = GetId("evalbox")
+        sandboxedframe.contentWindow.postMessage(code, '*');
       }
 
-      document.getElementById('safe').addEventListener('click', function () {
-        evaluate(sandboxedFrame);
-      });
+      var code = "console.log('hello')"
+      evaluate(code)
 
       window.addEventListener('message', function (e) {
         if ((e.origin === "null" && e.source === sandboxedFrame.contentWindow)) {
-          alert('Result: ' + e.data);
+          console.log(e.data);
         }
       });
     </script>

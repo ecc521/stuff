@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Tools</title>
+    <style>
+      html {
+        margin: 0;
+        padding: 0;
+      }
+      #evalbox { display: none; }
+    </style>
+  </head>
+  <body>
+    <h1>Image Tools</h1>
+    <iframe onload="evalboxready()" sandbox='allow-scripts' id='evalbox' src='frame.html'></iframe>
+
+    <script>
+      function GetId(n){return document.getElementById(n)}
+      
+      //Note: Only one call to this should be going on at once
+      async function evaluate(code) {
+        GetId("evalbox").contentWindow.postMessage(code, '*');
+                
+        return new Promise(function(resolve,reject) {
+          
+        function checkresp(e){
+          if ((e.origin === "null" && e.source === GetId("evalbox").contentWindow)) {
+            window.removeEventListener("message", checkresp)
+            resolve(e.data);
+          }
+        } 
+        window.addEventListener("message", checkresp)
+        })
+      }
+      
+      
+      var code = "2**53"
+      
+      async function evalboxready() {
+      var a = await evaluate(code)
+      console.log(a)
+      }
+      
+    </script>
+  </body>
+</html>

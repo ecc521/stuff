@@ -22,7 +22,7 @@
       }
 
       var code = "console.log('hello')"
-      evaluate(code)
+      setTimeout(function(){evaluate(code)},1000)
 
       window.addEventListener('message', function (e) {
         if ((e.origin === "null" && e.source === sandboxedFrame.contentWindow)) {

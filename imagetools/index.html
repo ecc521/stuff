@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Tools</title>
+  </head>
+  <body>
+    
+    <h1>Image Modifier</h1>
+    
+    <h3>Pick your Images!</h3>
+    <input type="file" id="fileinput" accept="image/*" multiple>
+    <br><br>
+    <canvas id="canvas" width="1" height="1">Sorry. Your browser does not support a needed feature.</canvas>
+
+    <!--Load the sandboxed library-->
+    <iframe onload="evalboxready()" sandbox='allow-scripts' id='evalbox' src='frame.html'></iframe>
+    
+    <style>
+      html {
+        margin: 0;
+        padding: 0;
+      }
+      #evalbox { display: none; }
+    </style>
+    
+    <script>
+      function GetId(n){return document.getElementById(n)}
+      
+      async function evaluate(code) {
+        //This is async, but only one call to it can go on at once.
+        GetId("evalbox").contentWindow.postMessage(code, '*');
+        return new Promise(function(resolve,reject) {
+        function checkresp(e){
+          if ((e.origin === "null" && e.source === GetId("evalbox").contentWindow)) {
+            window.removeEventListener("message", checkresp)
+            resolve(e.data);
+          }
+        } 
+        window.addEventListener("message", checkresp)
+        })
+      }
+      
+      
+      var code = "2**53"
+      
+      async function evalboxready() {
+      var a = await evaluate(code)
+      console.log(a)
+      }
+      
+    </script>
+  </body>
+</html>

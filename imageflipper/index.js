@@ -1,5 +1,7 @@
 function GetId(n){return document.getElementById(n)}
 
+GetId("input").addEventListener("change", genimg)
+
 async function genimg() {
     var elem = GetId("input")
     var files = elem.files

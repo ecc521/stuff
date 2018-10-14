@@ -17,21 +17,36 @@
     <script>
       function GetId(n){return document.getElementById(n)}
       
-      function evaluate(code) {
+      //Note: Only one call to this should be going on at once
+      async function evaluate(code) {
         GetId("evalbox").contentWindow.postMessage(code, '*');
+        
+        function checkresp(e){
+          if ((e.origin === "null" && e.source === GetId("evalbox").contentWindow)) {
+            window.removeEventListener("message", checkresp)
+            resolve(e.data);
+          }
+        }
+        
+        return new Promise(function(resolve,reject) {
+          window.addEventListener("message", checkresp)
+        })
       }
+      
+      
 
       var code = "2**53"
       
-      function evalboxready() {
-      evaluate(code)
+      async function evalboxready() {
+      var a = await evaluate(code)
+      console.log(a)
       }
 
-      window.addEventListener('message', function (e) {
+      function getresponse(e) {
         if ((e.origin === "null" && e.source === GetId("evalbox").contentWindow)) {
           console.log(e.data);
         }
-      });
+      };
       
     </script>
   </body>

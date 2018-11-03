@@ -12,7 +12,9 @@
   console.log(json)
   console.log(url)
 
-  json = await json.json()
+  json = await json.text()
+  console.log(json)
+  json = JSON.parse(json)
   console.log(json)
   
   let req = await fetch("https://ecc521.github.io/stuff/manifestcreator/manifest?youwillignorethisasmethodispost", {

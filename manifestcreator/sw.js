@@ -9,6 +9,14 @@ function fetchevent(event) {
             let url = event.request.url
             
             console.log(url)
+            
+            //Ignore requests for non manifests. In case registered in too high of a scope
+            if (url.indexOf("/stuff/manifestcreator/manifest?") === -1) {
+                console.warn("Ignored request for " + url)
+                return fetch(event.request)    
+            }
+            
+            
             url = url.slice(url.indexOf("?"))
             console.log(url)
             url = url.slice(0, url.length-1)

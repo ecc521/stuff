@@ -1,0 +1,9 @@
+<script>
+
+(async function(){
+  await navigator.serviceWorker.register("/stuff/manifestcreator/sw.js")
+  console.log(await fetch("https://ecc521.github.io/stuff/manifestcreator/manifest?{name:rivers.run}"))
+
+}())
+
+</script>

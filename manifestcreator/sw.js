@@ -16,7 +16,7 @@ function fetchevent(event) {
             window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction
             
             let db = await new Promise(function(resolve,reject){
-                let db = await indexedDB.open("manifest", 1);
+                let db = indexedDB.open("manifest", 1);
             
                 db.onupgradeneeded = function(value) {
                     let db = value.result

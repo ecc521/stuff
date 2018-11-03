@@ -15,7 +15,22 @@ function fetchevent(event) {
             window.indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB
             window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction
             
-            let db = await indexedDB.open("manifest", 1);
+            let db = await new Promise(function(resolve,reject){
+                let db = indexedDB.open("manifest", 1);
+            
+                db.onupgradeneeded = function(value) {
+                    let db = value.result
+                    db.createObjectStore('manifest', { autoIncrement: false })
+                    resolve(db)
+                }
+                
+                db.onsuccess = function(){
+                    resolve(db)
+                }
+            
+            })
+
+            
             console.log(db)
             let trans = await db.transaction("manifest", "readonly");
             console.log(trans)

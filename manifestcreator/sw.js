@@ -4,8 +4,6 @@ function fetchevent(event) {
     event.respondWith(
         (async function(){
             console.log(event)
-            
-          
             let url = event.request.url
             
             console.log(url)
@@ -16,8 +14,13 @@ function fetchevent(event) {
                 return fetch(event.request)    
             }
             
-            
+            if (event.request.method === "GET") {
             let manifest = url.slice(url.indexOf("?")+1)
+            }
+            else if (event.request.method === "POST") {
+            console.log(event.request)
+            
+            }
             console.log(manifest)
                         
             let headers = new Headers()

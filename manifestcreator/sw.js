@@ -24,7 +24,7 @@ function fetchevent(event) {
             console.log(manifest)
                         
             let headers = new Headers()
-            headers.set('Content-Type', 'text/json');
+            headers.set('Content-Type', 'application/json');
             headers.set('Access-Control-Allow-Origin', '*');
             headers.set('Cache-Control', 'no-cache');
             headers.set('Strict-Transport-Security', 'max-age=60; includeSubDomains');

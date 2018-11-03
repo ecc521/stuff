@@ -17,9 +17,7 @@ function fetchevent(event) {
             }
             
             
-            url = url.slice(url.indexOf("?"))
-            console.log(url)
-            url = url.slice(0, url.length-1)
+            url = url.slice(url.indexOf("?")+1)
             console.log(url)
             
             let manifest = JSON.parse(url)

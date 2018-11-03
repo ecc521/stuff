@@ -12,8 +12,8 @@ function fetchevent(event) {
             }
             
             //Deal with IndexedDB prefixes. Arrrgh....
-            window.indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB
-            window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction
+            self.indexedDB = self.indexedDB || self.webkitIndexedDB || self.mozIndexedDB || self.OIndexedDB || self.msIndexedDB
+            self.IDBTransaction = self.IDBTransaction || self.webkitIDBTransaction || self.OIDBTransaction || self.msIDBTransaction
             
             let db = await new Promise(function(resolve,reject){
                 let db = indexedDB.open("manifest", 1);

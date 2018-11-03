@@ -7,32 +7,20 @@
     name:"bob",
     short_name:"b"
   }
-  try {
-  let url = "https://ecc521.github.io/stuff/manifestcreator/manifest?" + JSON.stringify(obj)
-  let json = await fetch(url)
-  
-  console.log(json)
-  console.log(url)
 
-  json = await json.text()
-  console.log(json)
-  json = JSON.parse(json)
-  console.log(json)
-  }catch(e){console.error(e)}
+ let db = await indexedDB.open("manifest", 1);
+ console.log(db)
+ let trans = await db.transaction("manifest", "readwrite");
+ console.log(trans)
+ let store = await trans.objectStore("manifest")
+ console.log(store)
+ let manifest = await store.put(obj, "json")
+ console.log(manifest) 
   
-  let req = await fetch("https://ecc521.github.io/stuff/manifestcreator/manifest?youwillignorethisasmethodispost", {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
-        redirect: "follow",
-        body: JSON.stringify(obj)
-    })
-  console.log(req)
-  req = await req.json()
-  console.log(req)
+ let response = await fetch("https://ecc521.github.io/stuff/manifestcreator/manifest?")
+ console.log(response)
+ window.resp = response
+  
   
 }())
 

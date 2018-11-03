@@ -17,11 +17,7 @@ function fetchevent(event) {
             
             let db = await new Promise(function(resolve,reject){
                 let db = indexedDB.open("manifest", 1);
-            
-                db.onupgradeneeded = function(value) {
-                    reject("Manifest not in IndexedDB")
-                }
-                
+                            
                 db.onsuccess = function(){
                     resolve(db.result)
                 }

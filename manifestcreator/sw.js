@@ -17,11 +17,9 @@ function fetchevent(event) {
             }
             
             
-            url = url.slice(url.indexOf("?")+1)
-            console.log(url)
-            
-            let manifest = JSON.parse(url)
-            
+            let manifest = url.slice(url.indexOf("?")+1)
+            console.log(manifest)
+                        
             let headers = new Headers()
             headers.set('Content-Type', 'text/json');
             headers.set('Access-Control-Allow-Origin', '*');
@@ -34,7 +32,7 @@ function fetchevent(event) {
                 headers: headers
             }
             
-            return new Response(JSON.stringify(manifest), options)
+            return new Response(manifest, options)
         }())
     )
 }

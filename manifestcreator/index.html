@@ -2,7 +2,15 @@
 
 (async function(){
   await navigator.serviceWorker.register("/stuff/manifestcreator/sw.js")
-  console.log(await fetch("https://ecc521.github.io/stuff/manifestcreator/manifest?{name:rivers.run}"))
+  let obj = {
+    name:"bob",
+    short_name:"b"
+  }
+  let url = "https://ecc521.github.io/stuff/manifestcreator/manifest?" + JSON.stringify(obj)
+  let json = await fetch(url)
+  
+  console.log(json)
+  console.log(url)
 
 }())
 

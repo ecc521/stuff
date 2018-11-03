@@ -6,8 +6,8 @@ function fetchevent(event) {
 
             
             //Ignore requests for non manifests. In case registered in too high of a scope
-            if (url.indexOf("/stuff/manifestcreator/manifest?") === -1) {
-                console.warn("Ignored request for " + url)
+            if (event.request.url.indexOf("/stuff/manifestcreator/manifest?") === -1) {
+                console.warn("ServiceWorker: Sent request for " + event.request.url + " to the network")
                 return fetch(event.request)    
             }
             

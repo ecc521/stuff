@@ -11,12 +11,9 @@
   let db = await new Promise(function(resolve,reject){
     let db = indexedDB.open("manifest", 1);
             
-    db.onupgradeneeded = function(value) {
-      console.log(value)
-      let db = value.result
-      console.log(db)
+    db.onupgradeneeded = function(event) {
+      let db = event.target.result
       db.createObjectStore('manifest', { autoIncrement: false })
-      console.log(db)
       resolve(db)
     }
                 

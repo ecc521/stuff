@@ -12,6 +12,9 @@
     let db = indexedDB.open("manifest", 1);
             
     db.onupgradeneeded = function(value) {
+      let db = value.result
+      db.createObjectStore('manifest', { autoIncrement: false })
+      resolve(db)
     }
                 
     db.onsuccess = function(){

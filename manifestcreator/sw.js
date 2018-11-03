@@ -3,10 +3,7 @@ self.addEventListener("fetch", fetchevent)
 function fetchevent(event) {
     event.respondWith(
         (async function(){
-            console.log(event)
-            let url = event.request.url
-            
-            console.log(url)
+
             
             //Ignore requests for non manifests. In case registered in too high of a scope
             if (url.indexOf("/stuff/manifestcreator/manifest?") === -1) {
@@ -14,17 +11,17 @@ function fetchevent(event) {
                 return fetch(event.request)    
             }
             
-            let manifest;
-            if (event.request.method === "GET") {
-                manifest = decodeURI(url.slice(url.indexOf("?")+1))
-            }
-            else if (event.request.method === "POST") {
-            console.log(event.request)
-                console.log(await event.request.blob())
-                console.log(await event.request.json())
-                console.log(await event.request.text())
-                manifest = await event.request.json()
-            }
+            //Deal with IndexedDB prefixes. Arrrgh....
+            window.indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB
+            window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction
+            
+            let db = await indexedDB.open("manifest", 1);
+            console.log(db)
+            let trans = await db.transaction("manifest", "readonly");
+            console.log(trans)
+            let store = await trans.objectStore("manifest")
+            console.log(store)               
+            let manifest = await store.get("json")
             console.log(manifest)
                         
             let headers = new Headers()

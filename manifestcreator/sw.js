@@ -19,13 +19,11 @@ function fetchevent(event) {
                 let db = indexedDB.open("manifest", 1);
             
                 db.onupgradeneeded = function(value) {
-                    let db = value.result
-                    db.createObjectStore('manifest', { autoIncrement: false })
-                    resolve(db)
+                    reject("Manifest not in IndexedDB")
                 }
                 
                 db.onsuccess = function(){
-                    resolve(db)
+                    resolve(db.result)
                 }
             
             })

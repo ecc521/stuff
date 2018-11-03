@@ -15,7 +15,7 @@ function fetchevent(event) {
             }
             
             if (event.request.method === "GET") {
-            let manifest = url.slice(url.indexOf("?")+1)
+            let manifest = decodeURI(url.slice(url.indexOf("?")+1))
             }
             else if (event.request.method === "POST") {
             console.log(event.request)

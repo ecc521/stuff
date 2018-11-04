@@ -4,13 +4,11 @@
 
 (async function(){
   
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    console.log("ServiceWorker changed!")
-    console.log(Date.now())
+   navigator.serviceWorker.addEventListener('message', function(event){
+        console.log(event.data);
   });
   
   await navigator.serviceWorker.register("/stuff/manifestcreator/sw.js")
-  console.log(Date.now())
 
   
   let obj = {

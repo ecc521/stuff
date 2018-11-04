@@ -10,8 +10,8 @@ function send_message_to_all_clients(msg){
 }
 
 self.addEventListener("install", function(){self.skipWaiting()})
-self.addEventListener("activate", function(){
-    event.waitUnitl(clients.claim())
+self.addEventListener("activate", async function(){
+    await clients.claim()
     send_message_to_all_clients("scriptsloaded!")
 })
 

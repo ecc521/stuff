@@ -15,9 +15,21 @@
   await whenmessaged;
   }
   
-  let obj = {
-    name:"bob",
-    short_name:"b"
+  let obj = 
+  {
+    "short_name": "Project",
+    "name": "Scratch Project",
+    "icons": [
+      { 
+        "src":"https://lh3.googleusercontent.com/aklvPelfXoROZhJzG_L4jRWmR6mCDeNVFQrTQepKEloy9_4MpAhowFSzsG8PqwJM1LdT=s85",
+        "sizes": "300x300",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "https://scratch.mit.edu/projects/157344575/",
+    "background_color": "#000",
+    "theme_color": "#536878",
+    "display": "fullscreen"
   }
 
   let db = await lib.loaddb("manifest")

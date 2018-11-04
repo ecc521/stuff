@@ -1,3 +1,5 @@
+<script src="https://ecc521.github.io/librarys/indexeddb.js"></script>
+
 <script>
 
 (async function(){
@@ -8,29 +10,8 @@
     short_name:"b"
   }
 
-  let db = await new Promise(function(resolve,reject){
-    let db = indexedDB.open("manifest", 1);
-            
-    db.onupgradeneeded = function(event) {
-      let db = event.target.result
-      db.createObjectStore('manifest', { autoIncrement: false })
-      resolve(db)
-    }
-                
-    db.onsuccess = function(){
-      resolve(db.result)
-    }
-            
-  })
-            
-            
- console.log(db)
- let trans = await db.transaction("manifest", "readwrite");
- console.log(trans)
- let store = await trans.objectStore("manifest")
- console.log(store)
- let manifest = await store.put(obj, "json")
- console.log(manifest) 
+  let db = await lib.loaddb("manifest")
+  await db.set("json", JSON.stringify(obj))
   
  let response = await fetch("https://ecc521.github.io/stuff/manifestcreator/manifest?")
  console.log(response)

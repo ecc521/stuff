@@ -1,3 +1,5 @@
+self.importScripts("https://ecc521.github.io/librarys/indexeddb.js")
+
 self.addEventListener("fetch", fetchevent)
 
 function fetchevent(event) {
@@ -11,27 +13,8 @@ function fetchevent(event) {
                 return fetch(event.request)    
             }
             
-            //Deal with IndexedDB prefixes. Arrrgh....
-            self.indexedDB = self.indexedDB || self.webkitIndexedDB || self.mozIndexedDB || self.OIndexedDB || self.msIndexedDB
-            self.IDBTransaction = self.IDBTransaction || self.webkitIDBTransaction || self.OIDBTransaction || self.msIDBTransaction
-            
-            let db = await new Promise(function(resolve,reject){
-                let db = indexedDB.open("manifest", 1);
-                            
-                db.onsuccess = function(){
-                    resolve(db.result)
-                }
-            
-            })
-
-            
-            console.log(db)
-            let trans = await db.transaction("manifest", "readonly");
-            console.log(trans)
-            let store = await trans.objectStore("manifest")
-            console.log(store)               
-            let manifest = await store.get("json")
-            console.log(manifest)
+            let db = await loaddb("manifest")
+            let manifest = await db.get("json")
                         
             let headers = new Headers()
             headers.set('Content-Type', 'application/json');

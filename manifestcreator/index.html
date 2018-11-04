@@ -26,8 +26,8 @@
  window.resp = response
   
  let txt = await resp.text()
- let obj = await JSON.parse(txt)
- console.log(obj)
+ let manifest = await JSON.parse(txt)
+ console.log(manifest)
   
 }())
 

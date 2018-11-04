@@ -11,7 +11,9 @@
 
   await navigator.serviceWorker.register("/stuff/manifestcreator/sw.js")
 
+  if (navigator.serviceWorker.controller === null) {
   await whenmessaged;
+  }
   
   let obj = {
     name:"bob",

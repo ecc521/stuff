@@ -11,7 +11,7 @@ function send_message_to_all_clients(msg){
 
 self.addEventListener("install", function(){self.skipWaiting()})
 self.addEventListener("activate", function(){
-    clients.claim()
+    event.waitUnitl(clients.claim())
     send_message_to_all_clients("scriptsloaded!")
 })
 

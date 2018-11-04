@@ -1,5 +1,21 @@
 self.importScripts("https://ecc521.github.io/librarys/indexeddb.js")
 
+
+function send_message_to_all_clients(msg){
+    clients.matchAll().then(clients => {
+        clients.forEach(client => {
+            send_message_to_client(client, msg);
+        })
+    })
+}
+
+self.addEventListener("install", function(){self.skipWaiting()})
+self.addEventListener("activate", function(){
+    clients.claim()
+    send_message_to_all_clients("scriptsloaded!")
+})
+
+
 self.addEventListener("fetch", fetchevent)
 
 function fetchevent(event) {

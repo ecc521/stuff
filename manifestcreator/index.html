@@ -3,13 +3,15 @@
 <script>
 
 (async function(){
-  
-   navigator.serviceWorker.addEventListener('message', function(event){
-        console.log(event.data);
-  });
-  
+  let whenmessaged = new Promise(function(resolve, reject){
+    navigator.serviceWorker.addEventListener('message', function(event){
+        resolve()
+    });
+  })
+
   await navigator.serviceWorker.register("/stuff/manifestcreator/sw.js")
 
+  await whenmessaged;
   
   let obj = {
     name:"bob",

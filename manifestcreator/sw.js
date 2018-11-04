@@ -1,5 +1,8 @@
 self.importScripts("https://ecc521.github.io/librarys/indexeddb.js")
 
+function send_message_to_client(client, msg){
+    client.postMessage(msg);
+}
 
 function send_message_to_all_clients(msg){
     clients.matchAll().then(clients => {

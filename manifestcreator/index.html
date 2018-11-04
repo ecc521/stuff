@@ -3,7 +3,15 @@
 <script>
 
 (async function(){
+  
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    console.log("ServiceWorker changed!")
+    console.log(Date.now())
+  });
+  
   await navigator.serviceWorker.register("/stuff/manifestcreator/sw.js")
+  console.log(Date.now())
+
   
   let obj = {
     name:"bob",

@@ -13,7 +13,7 @@ function fetchevent(event) {
                 return fetch(event.request)    
             }
             
-            let db = await loaddb("manifest")
+            let db = await lib.loaddb("manifest")
             let manifest = await db.get("json")
                         
             let headers = new Headers()

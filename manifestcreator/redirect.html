@@ -1,10 +1,18 @@
 <h1>Powered by Scratch in An App</h1>
 <h3>Copyright (c) 2018 Tucker Willenborg</h3>
+
+
+<style>
+  h1,h3 {
+    text-align:center;
+  }
+</style>
+
 <script>
 let query = window.location.href
 query = query.slice(query.indexOf("?")+1)
   
-setTimeout(redirect,1500)
+setTimeout(redirect,800)
   
 function redirect() {
 window.location = query

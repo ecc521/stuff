@@ -15,6 +15,9 @@
   await whenmessaged;
   }
   
+  //ServiceWorker is registered and ready to go.
+  
+  
   let obj = 
   {
     "short_name": "Star Trek",
@@ -32,8 +35,8 @@
     "display": "fullscreen"
   }
 
-  let db = await lib.loaddb("manifest")
-  await db.set("json", JSON.stringify(obj))
+ let db = await lib.loaddb("manifest")
+ await db.set("json", JSON.stringify(obj))
   
  let response = await fetch("https://ecc521.github.io/stuff/manifestcreator/manifest?")
  console.log(response)

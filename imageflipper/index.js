@@ -49,7 +49,13 @@ async function genimg() {
     folder.file("hflipped-" + images[c].name, base64String, {base64: true});
     }
     
-    var content = await folder.generateAsync({type:"blob"})
+    var content = await folder.generateAsync({
+        type:"blob",
+        compression: "DEFLATE",
+        compressionOptions: {
+            level: 9
+        }
+    })
     
     canvas.hidden = "hidden"
     
